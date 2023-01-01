@@ -5,13 +5,14 @@ import { CustomButton } from "./";
 
 import { logo, menu, search, thirdweb } from "../assets";
 import { navlinks } from "../constants";
+import { useStateContext } from "../context";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState("false");
   const navigate = useNavigate();
+  const { address, connect } = useStateContext();
 
-  const address = "0xabcd";
   return (
     <div
       className="flex md:flex-row flex-col-reverse justify-between
@@ -47,7 +48,7 @@ const Navbar = () => {
           styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
           handleClick={() => {
             if (address) navigate("/create-campaign");
-            else console.log("coonect()");
+            else connect();
           }}
         />
 
@@ -71,7 +72,7 @@ const Navbar = () => {
           items-center cursor-pointer"
         >
           <img
-            src={thirdweb}
+            src={logo}
             alt="user"
             className="w-[60%] h-[60%] object-contain"
           />
@@ -127,7 +128,7 @@ const Navbar = () => {
               styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
               handleClick={() => {
                 if (address) navigate("create-campaign");
-                else console.log("coonect()");
+                else connect();
               }}
             />
           </div>
